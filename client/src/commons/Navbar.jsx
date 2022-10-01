@@ -19,10 +19,14 @@ import {Menu as MenuIcon, Search as SearchIcon} from '@mui/icons-material';
 import useMatches from '../hooks/useMatches';
 import { useState } from 'react';
 import logo from '../assets/tmdb.svg'
+import MenuButton from './MenuButton'
 
-const pagesDesktop = [{name:'Movies', url:'movies'}, {name:'TV Shows', url:'tv'}, {name:'People', url:'people'}];
+const pagesDesktop = ['Movies' ,'TV Shows', 'People'];
+const movies = [{name:'Popular', url:'/movies?query=popular'}, {name:'Now Playing', url:'/movies?query=nowPlaying'}, {name:'Upcoming', url:'/movies?query=upcoming'}, {name:'Top Rated', url:'/movies?query=topRated'}];
+const tvshows = [{name:'Popular', url:'/tv?query=popular'}, {name:'Airing Today', url:'/tv?query=airingToday'}, {name:'On TV', url:'/tv?query=ontv'}, {name:'Top Rated', url:'/tv?query=topRated'}];
+const people = [{name:'Popular', url:'/people?query=popular'}, {name:'Latest', url:'/people?query=latest'}];
 const pagesMobile = [{name:'Search', url:'search'}, {name:'Movies', url:'movies'}, {name:'TV Shows', url:'tv'}, {name:'People', url:'people'}];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'WatchList', 'Watched', 'Logout'];
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -99,7 +103,7 @@ const ResponsiveAppBar = () => {
   let TMDBStyle
   let account
   
-  if(''){
+  if('a'){
     account = <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -232,7 +236,7 @@ const ResponsiveAppBar = () => {
             >
               {pagesMobile.map((page) => (
                 <Link to={page.url} style={{textDecoration:'none', color:'inherit'}} key={page.name}>
-                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={handleCloseNavMenu} sx={{m:0}}>
                     <Typography textAlign="center">{page.name}</Typography>
                   </MenuItem>
                 </Link>
@@ -255,21 +259,21 @@ const ResponsiveAppBar = () => {
                 }}
               >
                 <img src={logo} alt="" />
-                TMDBlogo
               </Typography>
             </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pagesDesktop.map((page) => (
-              <Link to={page.url} style={{textDecoration:'none', color:'inherit'}} key={page.name}>
-                <Button
-                  key={page.name}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page.name}
-                </Button>
-              </Link>
-            ))}
+            {pagesDesktop.map((page) => {
+              let result
+              if(page ==='Movies')result = <MenuButton key={page.name} props={{name:page, menu:movies}}/>
+              if(page ==='TV Shows')result = <MenuButton key={page.name} props={{name:page, menu:tvshows}}/>
+              if(page ==='People')result = <MenuButton key={page.name} props={{name:page, menu:people}}/>
+              return(
+                <>
+                  {result}
+                </>
+              )
+            })
+            }
           </Box>
           {search}
           <Box sx={{ flexGrow: 0, ml:2 }}>

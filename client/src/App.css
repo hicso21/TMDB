@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.imageList::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.imageList::-webkit-scrollbar:horizontal {
+  width:10px;
+}
+
+.imageList::-webkit-scrollbar-button:increment,.imageList::-webkit-scrollbar-button {
+  display: none;
+} 
+
+.imageList::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.imageList::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.imageList::-webkit-scrollbar-track {
+  border-radius: 10px;  
+}
