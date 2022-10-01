@@ -7,7 +7,7 @@ export const getSearch = createAsyncThunk('SEARCH', (input)=>{
                     `http://localhost:3001/api/search/${input}`,
                     { withCredentials: true, credentials: 'include' }
                 )
-                .then(res=>res.data)
+                .then(res=>res.data.results)
 })
 
 const searchReducer = createReducer({}, {

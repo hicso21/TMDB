@@ -8,7 +8,6 @@ const People = () => {
 
     useEffect(()=>{
         dispatch(getPopularPeople())
-        .then(()=>{console.log(people)})
     },[])
 
     return (

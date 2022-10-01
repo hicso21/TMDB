@@ -1,22 +1,22 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getPopularPeople = createAsyncThunk('POPULAR', ()=>{
+export const getPopularPeople = createAsyncThunk('POPULARPEOPLE', ()=>{
     return axios
                 .get(
                     'http://localhost:3001/api/people/getPopular',
                     { withCredentials: true, credentials: 'include' }
                 )
-                .then(res=>res.data)
+                .then(res=>res.data.results)
 })
 
-export const getLatestPeople = createAsyncThunk('LATEST', ()=>{
+export const getLatestPeople = createAsyncThunk('LATESTPEOPLE', ()=>{
     return axios
                 .get(
                     'http://localhost:3001/api/people/getLatest',
                     { withCredentials: true, credentials: 'include' }
                 )
-                .then(res=>res.data)
+                .then(res=>res.data.results)
 })
 
 export const searchByPerson = createAsyncThunk('SEARCHBYPERSON', (input)=>{
@@ -25,7 +25,7 @@ export const searchByPerson = createAsyncThunk('SEARCHBYPERSON', (input)=>{
                     `http://localhost:3001/api/search/people/${input}`,
                     { withCredentials: true, credentials: 'include' }
                 )
-                .then(res=>res.data)
+                .then(res=>res.data.results)
 })
 
 const peopleReducer = createReducer({}, {
