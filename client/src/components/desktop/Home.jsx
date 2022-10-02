@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Slider from '../../commons/desktop/Slider'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPopularMovies } from '../../state/movies'
 import { ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material';
@@ -11,12 +10,13 @@ import ProgressBar from '../../commons/desktop/ProgressBar';
 
 const Home = () => {
 
+  const movieUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
   const [moviesList, setMoviesList] = useState([])
   const [tvshowsList, setTvshowsList] = useState([])
 
   let ImageStyle = { width: '90%', height: '40%', display:'flex', flexDirection:'row', margin:'auto'}
 
-  function ImageListMovies({ items, type }) {
+  function Slider({ items, type }) {
     return (
       <ImageList sx={ImageStyle} className='imageList'>
         {!items[0]?<ProgressBar/>:items.map((item) => {
@@ -24,7 +24,7 @@ const Home = () => {
           <Link to={`/${type}/${item.id}`} style={{color: 'inherit', textDecoration:'none', padding:5, width:200}} key={item.id.toString()}>
             <ImageListItem>
               <img
-                src={item.poster_path?`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${item.poster_path}`:''}
+                src={item.poster_path?`${movieUrl}/${item.poster_path}`:''}
                 alt={item.name}
                 loading="lazy"
                 style={{maxHeight:300, borderRadius:15, width:200}}
@@ -57,11 +57,11 @@ const Home = () => {
     <>
       <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', ml:'10%', mr:'10%'}}>
         <Typography variant='h4' sx={{width:'100%', ml:'12%', pt:2}}>Popular Movies</Typography>
-        <ImageListMovies items={moviesList} type={'movie'}/>
+        <Slider items={moviesList} type={'movie'}/>
       </Box>
       <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', ml:'10%', mr:'10%'}}>
         <Typography variant='h4' sx={{width:'100%', ml:'12%'}}>Popular TV Shows</Typography>
-        <ImageListMovies items={tvshows} type={'tv'}/>
+        <Slider items={tvshows} type={'tv'}/>
       </Box>
     </>
   )

@@ -26,7 +26,7 @@ const movies = [{name:'Popular', url:'/movies?query=popular'}, {name:'Now Playin
 const tvshows = [{name:'Popular', url:'/tv?query=popular'}, {name:'Airing Today', url:'/tv?query=airingToday'}, {name:'On TV', url:'/tv?query=ontv'}, {name:'Top Rated', url:'/tv?query=topRated'}];
 const people = [{name:'Popular', url:'/people?query=popular'}, {name:'Latest', url:'/people?query=latest'}];
 const pagesMobile = [{name:'Search', url:'search'}, {name:'Movies', url:'movies'}, {name:'TV Shows', url:'tv'}, {name:'People', url:'people'}];
-const settings = ['Profile', 'WatchList', 'Watched', 'Logout'];
+const settings = [{name:'Profile', fn:()=>{}}, {name:'WatchList', fn:()=>{}}, {name:'Watched', fn:()=>{}}, {name:'Logout', fn:()=>{/* Logout State */console.log('futa')}}];
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -72,13 +72,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const ResponsiveAppBar = () => {
 
+
   const matches = useMatches();
   const navigate = useNavigate()
   // eslint-disable-next-line
   const [founder, setFounder] = useState('')
 
   const handleSubmit = () => {
-    navigate(`/search/${founder}`)
+    navigate(`/search?query=${founder}`)
   }
   
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -128,10 +129,15 @@ const ResponsiveAppBar = () => {
                 >
                     
                   {settings.map((setting) => {
-                  return(
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
+                    return(
+                    <Link style={{textDecoration:'none', color:'inherit'}} to={setting.name !== 'Logout'?`/${setting.name.toLowerCase()}`:'/'}>
+                      <MenuItem onClick={()=>{
+                        setting?.fn()
+                        handleCloseUserMenu()
+                      }}>
+                        <Typography textAlign="center">{setting.name}</Typography>
+                      </MenuItem>
+                    </Link>
                   )})}
                 </Menu>
               </>
