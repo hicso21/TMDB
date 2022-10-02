@@ -12,9 +12,27 @@ router.get('/getPopular', async (req, res)=> {
     }
 })
 
-router.get('/getLatest', async (req, res)=> {
+router.get('/getNowPlaying', async (req, res)=> {
     try {
-        const {data} = await axios.get(`${process.env.TMDB_API}/movie/latest?api_key=${process.env.API_KEY}&language=en-US&page=1`)
+        const {data} = await axios.get(`${process.env.TMDB_API}/movie/now_playing?api_key=${process.env.API_KEY}&language=en-US&page=1`)
+        res.status(200).send(data)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+router.get('/getTopRated', async (req, res)=> {
+    try {
+        const {data} = await axios.get(`${process.env.TMDB_API}/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US&page=1`)
+        res.status(200).send(data)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+router.get('/getUpcoming', async (req, res)=> {
+    try {
+        const {data} = await axios.get(`${process.env.TMDB_API}/movie/upcoming?api_key=${process.env.API_KEY}&language=en-US&page=1`)
         res.status(200).send(data)
     } catch (error) {
         res.send(error)
