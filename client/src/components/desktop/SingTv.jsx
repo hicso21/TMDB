@@ -42,7 +42,7 @@ const SingTv = () => {
 
     useEffect(()=>{
         dispatch(getOneTvshow(params.pathname.substring(4)))
-    },[])
+    },[params.search])
 
     return (
         <>

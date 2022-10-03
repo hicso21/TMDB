@@ -50,8 +50,11 @@ router.get('/getByGender', async (req, res)=> {
 
 router.get('/getOneMovie/:movieId', async (req, res)=> {
     try {
-        const {data} = await axios.get(`${process.env.TMDB_API}/movie/${req.params.movieId}?api_key=${process.env.API_KEY}&language=en-US&page=1`)
-        res.status(200).send(data)
+        const movie = await axios.get(`${process.env.TMDB_API}/movie/${req.params.movieId}?api_key=${process.env.API_KEY}&language=en-US`)
+        const {data} = await axios.get(`${process.env.TMDB_API}/movie/${req.params.movieId}/credits?api_key=${process.env.API_KEY}&language=en-US`)
+        movie.data.aggregate_credits = data
+        console.log(movie.data)
+        res.status(200).send(movie.data)
     } catch (error) {
         res.send(error)
     }

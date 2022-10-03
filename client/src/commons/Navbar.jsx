@@ -24,7 +24,7 @@ import MenuButton from './MenuButton'
 const pagesDesktop = ['Movies' ,'TV Shows', 'People'];
 const movies = [{name:'Popular', url:'/movies?query=popular'}, {name:'Now Playing', url:'/movies?query=nowPlaying'}, {name:'Upcoming', url:'/movies?query=upcoming'}, {name:'Top Rated', url:'/movies?query=topRated'}];
 const tvshows = [{name:'Popular', url:'/tv?query=popular'}, {name:'Airing Today', url:'/tv?query=airingToday'}, {name:'On TV', url:'/tv?query=ontv'}, {name:'Top Rated', url:'/tv?query=topRated'}];
-const people = [{name:'Popular', url:'/people?query=popular'}, {name:'Latest', url:'/people?query=latest'}];
+const people = [{name:'Popular', url:'/people?query=popular'}];
 const pagesMobile = [{name:'Search', url:'search'}, {name:'Movies', url:'movies'}, {name:'TV Shows', url:'tv'}, {name:'People', url:'people'}];
 const settings = [{name:'Profile', fn:()=>{}}, {name:'WatchList', fn:()=>{}}, {name:'Watched', fn:()=>{}}, {name:'Logout', fn:()=>{/* Logout State */console.log('futa')}}];
 

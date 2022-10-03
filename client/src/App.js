@@ -26,8 +26,8 @@ function App() {
               <Route path="/movie/:id" element={matches?<SingMovie/>:<></>}/>
               <Route path="/tv" element={matches?<TVShows/>:<></>}/>
               <Route path="/tv/:id" element={matches?<SingTv/>:<></>}/>
-              <Route path="/person" element={matches?<People/>:<></>}/>
-              <Route path="/person/:id" element={matches?<People/>:<></>}/>
+              <Route path="/people" element={matches?<People/>:<></>}/>
+              <Route path="/person/:id" element={matches?<></>:<></>}/>
               <Route path="/gender" element={matches?<></>:<></>}/>
               <Route path="/search" element={matches?<Search/>:<></>}/>
               <Route path="/profile" element={matches?<></>:<></>}/>
