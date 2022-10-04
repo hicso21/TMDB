@@ -4,6 +4,7 @@ import { useLocation } from 'react-router'
 import { getOneMovie } from '../../state/movies'
 import { Box, CardMedia, Divider, ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material'
 import ProgressBar from '../../commons/desktop/ProgressBar'
+import notPhoto from '../../assets/notPhoto.svg'
 import { Link } from 'react-router-dom'
 
 const SingMovie = () => {
@@ -22,10 +23,10 @@ const SingMovie = () => {
               <Link to={`/${type}/${item.id}`} style={{color: 'inherit', textDecoration:'none', padding:5, width:200}} key={item.id}>
                 <ImageListItem>
                   <img
-                    src={item.profile_path?`${imgUrl}/${item.profile_path}`:''}
+                    src={item.profile_path?`${imgUrl}/${item.profile_path}`:notPhoto}
                     alt={item?.name}
                     loading="lazy"
-                    style={{maxHeight:300, borderRadius:15, width:200}}
+                    style={{height:300, borderRadius:15, width:200, backgroundColor:'lightgray'}}
                     />
                   <ImageListItemBar
                     title={item?.name}
