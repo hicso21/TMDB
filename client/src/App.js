@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import SingMovie from "./components/desktop/SingMovie";
 import SingTv from "./components/desktop/SingTv";
+import Person from "./components/desktop/Person";
 
 function App() {
   const matches = useMatches()
@@ -27,7 +28,7 @@ function App() {
               <Route path="/tv" element={matches?<TVShows/>:<></>}/>
               <Route path="/tv/:id" element={matches?<SingTv/>:<></>}/>
               <Route path="/people" element={matches?<People/>:<></>}/>
-              <Route path="/person/:id" element={matches?<></>:<></>}/>
+              <Route path="/person/:id" element={matches?<Person/>:<></>}/>
               <Route path="/gender" element={matches?<></>:<></>}/>
               <Route path="/search" element={matches?<Search/>:<></>}/>
               <Route path="/profile" element={matches?<></>:<></>}/>

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
+import fetchAPI from "../utils/fetchAPI";
 
 export const getSearch = createAsyncThunk('SEARCH', (input)=>{
-    return axios
-                .get(
-                    `http://localhost:3001/api/search/${input}`,
+    return fetchAPI(
+                    `/api/search/${input}`,
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)

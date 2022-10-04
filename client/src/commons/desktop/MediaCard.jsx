@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const MediaCard = ({prop}) => {
-  const movieUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
+  const imgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
   return (
     <Box sx={{m:'21px'}}>
       <Card sx={{ width: 200 }}>
@@ -12,7 +12,7 @@ const MediaCard = ({prop}) => {
               <CardMedia
                 component="img"
                 height="280"
-                image={prop?.poster_path?`${movieUrl}/${prop.poster_path}`:''}
+                image={prop?.poster_path?`${imgUrl}/${prop.poster_path}`:''}
                 alt="green iguana"
               />
               <CardContent>

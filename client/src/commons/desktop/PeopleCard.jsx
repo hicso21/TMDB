@@ -10,7 +10,7 @@ import notPhoto from '../../assets/notPhoto.svg'
 
 const PeopleCard = ({prop}) => {
 
-    const peopleUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
+    const imgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
     const [known, setKnown] = useState('')
     const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ const PeopleCard = ({prop}) => {
         <CardMedia
           component="img"
           height="235"
-          image={prop.profile_path?`${peopleUrl}/${prop.profile_path}`:notPhoto}
+          image={prop.profile_path?`${imgUrl}/${prop.profile_path}`:notPhoto}
           alt="people"
           sx={prop.profile_path?{}:{backgroundColor:'lightgray'}}
         />

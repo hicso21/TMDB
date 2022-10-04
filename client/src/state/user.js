@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
+import fetchAPI from "../utils/fetchAPI";
 
 export const loginRequest = createAsyncThunk('LOGIN', ()=>{
     
