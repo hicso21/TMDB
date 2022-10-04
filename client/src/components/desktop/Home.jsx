@@ -5,12 +5,12 @@ import { ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/mat
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/system';
 import { getPopularShows } from '../../state/tvshows';
-import '../../App.css'
 import ProgressBar from '../../commons/desktop/ProgressBar';
+import '../../App.css'
 
 const Home = () => {
 
-  const movieUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
+  const imgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
   const [moviesList, setMoviesList] = useState([])
   const [tvshowsList, setTvshowsList] = useState([])
 
@@ -24,7 +24,7 @@ const Home = () => {
           <Link to={`/${type}/${item.id}`} style={{color: 'inherit', textDecoration:'none', padding:5, width:200}} key={item.id.toString()}>
             <ImageListItem>
               <img
-                src={item.poster_path?`${movieUrl}/${item.poster_path}`:''}
+                src={item.poster_path?`${imgUrl}/${item.poster_path}`:''}
                 alt={item.name}
                 loading="lazy"
                 style={{maxHeight:300, borderRadius:15, width:200}}

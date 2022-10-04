@@ -10,7 +10,7 @@ const SingTv = () => {
     const params = useLocation()
     const dispatch = useDispatch()
     const {tvshows} = useSelector(state=>state)
-    const tvUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
+    const imgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
 
     let ImageStyle = { width: '90%', height: '80%', display:'flex', flexDirection:'row', margin:'auto'}
 
@@ -22,7 +22,7 @@ const SingTv = () => {
               <Link to={`/${type}/${item.id}`} style={{color: 'inherit', textDecoration:'none', padding:5, width:200}} key={item.id}>
                 <ImageListItem>
                   <img
-                    src={item.profile_path?`${tvUrl}/${item.profile_path}`:''}
+                    src={item.profile_path?`${imgUrl}/${item.profile_path}`:''}
                     alt={item?.name}
                     loading="lazy"
                     style={{maxHeight:300, borderRadius:15, width:200}}
@@ -49,7 +49,7 @@ const SingTv = () => {
             <Box sx={{width:'100%', height:500, display:'flex', paddingTop:5}}>
                 <Box sx={{mr:10, ml:10, width:'100%', height:500, display:'flex'}}>
                     <Box sx={{width:'25%'}}>
-                        <CardMedia component='img' image={`${tvUrl}/${tvshows.poster_path}`} sx={{borderRadius:2, width:300, height:450, ml:'10%'}}/>
+                        <CardMedia component='img' image={`${imgUrl}/${tvshows.poster_path}`} sx={{borderRadius:2, width:300, height:450, ml:'10%'}}/>
                     </Box>
                     <Box sx={{width:'75%', paddingTop:6, pl:5/* pl:5 temporal */}}>
                         <Box id='firstInfo' sx={{display:'flex', justifyContent:'center', flexDirection:'column'}}>

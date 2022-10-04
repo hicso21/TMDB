@@ -1,22 +1,21 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
+import fetchAPI from "../utils/fetchAPI";
 
 export const getPopularPeople = createAsyncThunk('POPULARPEOPLE', (input)=>{
-    return axios
-                .get(
-                    `http://localhost:3001/api/people/getPopular/${input}`,
+    return fetchAPI(
+                    `/api/people/getPopular/${input}`,
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)
 })
 
 export const searchByPerson = createAsyncThunk('SEARCHBYPERSON', (input)=>{
-    return axios
-                .get(
-                    `http://localhost:3001/api/search/people/${input}`,
+    return fetchAPI(
+                    `/api/people/search/${input}`,
                     { withCredentials: true, credentials: 'include' }
                 )
-                .then(res=>res.data.results)
+                .then(res=>res.data)
 })
 
 const peopleReducer = createReducer({}, {
