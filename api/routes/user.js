@@ -5,7 +5,7 @@ const { validateAuth } = require("../middlewares/authUser");
 
 router.get("/all", UserController.getAllUsers);
 
-router.post("/register", UserController.createUser);
+router.post("/signup", UserController.createUser);
 
 router.post("/login", UserController.logIn);
 

@@ -2,16 +2,37 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
 import { getOneMovie } from '../../state/movies'
-import { Box, CardMedia, Divider, ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material'
+import { Box, Button, CardMedia, Divider, ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material'
 import ProgressBar from '../../commons/desktop/ProgressBar'
 import notPhoto from '../../assets/notPhoto.svg'
 import { Link } from 'react-router-dom'
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 const SingMovie = () => {
     const params = useLocation()
     const dispatch = useDispatch()
     const {movies} = useSelector(state=>state)
+    const {user} = useSelector(state=>state)
     const imgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
+
+    const handleWatched = ()=>{
+
+    }
+
+    const handleFavorites = ()=>{
+        
+    }
+
+    const handleWatchlist = ()=>{
+        
+    }
 
     let ImageStyle = { width: '90%', height: '80%', display:'flex', flexDirection:'row', margin:'auto'}
 
@@ -58,18 +79,23 @@ const SingMovie = () => {
                             <Typography variant='h4'>{movies.title}</Typography>
                             <Typography variant='body1'>{movies.genres?.map((item, i)=>{
                                 return(
-                                    <>
-                                        {i === movies.genres.length-1?(item.name):(item.name+',')}
-                                    </>
+                                    <span key={item.id}>
+                                        {i === movies.genres.length-1?(item.name):(item.name+', ')}
+                                    </span>
                                 )
                             })}{` - ${movies.runtime} min`}</Typography>
                             <Typography variant='text.secondary'>{`(${movies.release_date?.substring(0, 4)})`}</Typography>
                         </Box>
-                        <Box id='userButtons' sx={{display:'flex', justifyContent:'center', width:'100%', pt:1}}>
-                            <Typography sx={{p:1}}>fav</Typography>
-                            <Typography sx={{p:1}}>watchlist</Typography>
-                            <Typography sx={{p:1}}>watched</Typography>
-                            <Typography sx={{p:1}}>like</Typography>
+                        <Box id='userButtons' sx={{display:'flex', justifyContent:'start', width:'100%', pt:1}}>
+                            <Tooltip title='Add to Watched'>
+                                <Button sx={{color:'inherit', mt:1, mb:1}} onClick={handleWatched}><AddCircleOutlineIcon sx={{width:30, height:28}}/></Button>
+                            </Tooltip>
+                            <Tooltip title='Add to Favorites'>
+                                <Button sx={{color:'inherit', mt:1, mb:1}} onClick={handleFavorites}><StarBorderIcon sx={{width:30, height:28}}/></Button>
+                            </Tooltip>
+                            <Tooltip title='Add to your Watchlist'>
+                                <Button sx={{color:'inherit', mt:1, mb:1}} onClick={handleWatchlist}><BookmarkBorderIcon sx={{width:30, height:28}}/></Button>
+                            </Tooltip>
                         </Box>
                         <Box id='tagline' sx={{display:'flex', justifyContent:'start', width:'100%', pt:1}}>
                             <Typography variant='body1' sx={{opacity:0.7, fontStyle:'italic'}}>{movies.tagline}</Typography>
