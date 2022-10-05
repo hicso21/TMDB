@@ -5,7 +5,8 @@ const fetchAPI = axios.create({
     headers:{
         Accept:'application/json',
     },
-    
+    withCredentials:true,
+    credentials:'include'
 });
 
 export default fetchAPI

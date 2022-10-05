@@ -40,6 +40,14 @@ class UserService {
     }
   }
 
+  static async getUser(id) {
+    try {
+      return await Users.findOne({ _id: id });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   static async addFavorite(id, fav) {
     try {
       return await Users.findByIdAndUpdate(
@@ -48,7 +56,7 @@ class UserService {
           $addToSet: { favorites: fav },
         },
         { new: true, runValidators: true }
-      ).populate("favorites");
+      )
     } catch (error) {
       console.log(error.message);
     }
@@ -62,7 +70,7 @@ class UserService {
           $pull: { favorites: petId },
         },
         { new: true, runValidators: true }
-      ).populate("favorites");
+      )
     } catch (error) {
       console.log(error.message);
     }

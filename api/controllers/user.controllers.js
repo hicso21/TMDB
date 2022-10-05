@@ -17,6 +17,7 @@ class UserController {
 
   static async createUser(req, res) {
     try {
+      console.log(req.body)
       const user = await UserService.createUser(req.body);
       if (user) {
         const token = generateToken({
@@ -26,7 +27,10 @@ class UserController {
           email: user.email,
           profile_picture: user.profile_picture,
           age: user.age,
-          favorites: user.favorites
+          favorites: user.favorites,
+          watched: user.watched,
+          to_watch: user.to_watch,
+          rating: user.rating
         });
         const payload = validateToken(token);
         req.user = payload;
@@ -70,6 +74,9 @@ class UserController {
             profile_picture: user.profile_picture,
             age: user.age,
             favorites: user.favorites,
+            watched: user.watched,
+            to_watch: user.to_watch,
+            rating: user.rating
           });
           const payload = validateToken(token);
           req.user = payload;
@@ -84,7 +91,6 @@ class UserController {
 
   static async logOut(req, res) {
     try {
-      console.log(req.cookies.token);
       res.clearCookie("token");
       res.sendStatus(200);
     } catch (error) {
@@ -133,30 +139,30 @@ class UserController {
     }
   }
 
-  static async userUpdate(req, res) {
-    let _id = req.params.id;
-    let update = req.body;
-    console.log(update);
+  // static async userUpdate(req, res) {
+  //   let _id = req.params.id;
+  //   let update = req.body;
+  //   console.log(update);
 
-    Users.findByIdAndUpdate(_id, update, (err, bodyUpdated) => {
-      if(err) return res.status(500).send({message: `Error al actualizar la nota: ${err}`})
+  //   Users.findByIdAndUpdate(_id, update, (err, bodyUpdated) => {
+  //     if(err) return res.status(500).send({message: `Error al actualizar la nota: ${err}`})
   
-      if(!bodyUpdated) return res.status(500).send({message: 'No retornó objeto actualizado'})
+  //     if(!bodyUpdated) return res.status(500).send({message: 'No retornó objeto actualizado'})
       
-      const objectToReturn = {
-        email: update.email,
-        name: update.name,
-        _id : bodyUpdated._id,
-        last_name: update.last_name,
-        favorites: bodyUpdated.favorites,
-        profile_picture: update.profile_picture,
-      }
+  //     const objectToReturn = {
+  //       email: update.email,
+  //       name: update.name,
+  //       _id : bodyUpdated._id,
+  //       last_name: update.last_name,
+  //       favorites: bodyUpdated.favorites,
+  //       profile_picture: update.profile_picture,
+  //     }
 
-      console.log(objectToReturn)
+  //     console.log(objectToReturn)
 
-      res.status(200).send(objectToReturn)
-    })
-  }
+  //     res.status(200).send(objectToReturn)
+  //   })
+  // }
 
   static async getFavorites(req, res) {
     try {

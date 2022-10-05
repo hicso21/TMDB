@@ -13,20 +13,15 @@ import {
   MenuItem, 
   InputBase
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import {Menu as MenuIcon, Search as SearchIcon} from '@mui/icons-material';
 import useMatches from '../hooks/useMatches';
 import { useState } from 'react';
 import logo from '../assets/tmdb.svg'
 import MenuButton from './MenuButton'
-
-const pagesDesktop = ['Movies' ,'TV Shows', 'People'];
-const movies = [{name:'Popular', url:'/movies?query=popular'}, {name:'Now Playing', url:'/movies?query=nowPlaying'}, {name:'Upcoming', url:'/movies?query=upcoming'}, {name:'Top Rated', url:'/movies?query=topRated'}];
-const tvshows = [{name:'Popular', url:'/tv?query=popular'}, {name:'Airing Today', url:'/tv?query=airingToday'}, {name:'On TV', url:'/tv?query=ontv'}, {name:'Top Rated', url:'/tv?query=topRated'}];
-const people = [{name:'Popular', url:'/people?query=popular'}];
-const pagesMobile = [{name:'Search', url:'search'}, {name:'Movies', url:'movies'}, {name:'TV Shows', url:'tv'}, {name:'People', url:'people'}];
-const settings = [{name:'Profile', fn:()=>{}}, {name:'WatchList', fn:()=>{}}, {name:'Watched', fn:()=>{}}, {name:'Logout', fn:()=>{/* Logout State */console.log('futa')}}];
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutRequest } from '../state/user';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -71,8 +66,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const ResponsiveAppBar = () => {
-
-
+  
+  const dispatch = useDispatch()
+  const pagesDesktop = ['Movies' ,'TV Shows', 'People'];
+  const movies = [{name:'Popular', url:'/movies?query=popular'}, {name:'Now Playing', url:'/movies?query=nowPlaying'}, {name:'Upcoming', url:'/movies?query=upcoming'}, {name:'Top Rated', url:'/movies?query=topRated'}];
+  const tvshows = [{name:'Popular', url:'/tv?query=popular'}, {name:'Airing Today', url:'/tv?query=airingToday'}, {name:'On TV', url:'/tv?query=ontv'}, {name:'Top Rated', url:'/tv?query=topRated'}];
+  const people = [{name:'Popular', url:'/people?query=popular'}];
+  const pagesMobile = [{name:'Search', url:'search'}, {name:'Movies', url:'movies'}, {name:'TV Shows', url:'tv'}, {name:'People', url:'people'}];
+  const settings = [{name:'Profile', fn:()=>{}}, {name:'Watchlist', fn:()=>{}}, {name:'Watched', fn:()=>{}}, {name:'Logout', fn:()=>{dispatch(logoutRequest())}}];
+  
+  const {user} = useSelector(state=>state)
   const matches = useMatches();
   const navigate = useNavigate()
   // eslint-disable-next-line
@@ -104,7 +107,8 @@ const ResponsiveAppBar = () => {
   let TMDBStyle
   let account
   
-  if('a'){
+  //console.log(user)
+  if(user.email){
     account = <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -130,7 +134,7 @@ const ResponsiveAppBar = () => {
                     
                   {settings.map((setting) => {
                     return(
-                    <Link style={{textDecoration:'none', color:'inherit'}} to={setting.name !== 'Logout'?`/${setting.name.toLowerCase()}`:'/'}>
+                    <Link key={setting.name} style={{textDecoration:'none', color:'inherit'}} to={setting.name !== 'Logout'?`/${setting.name.toLowerCase()}`:'/'}>
                       <MenuItem onClick={()=>{
                         setting?.fn()
                         handleCloseUserMenu()
@@ -274,9 +278,9 @@ const ResponsiveAppBar = () => {
               if(page ==='TV Shows')result = <MenuButton key={page.name} props={{name:page, menu:tvshows}}/>
               if(page ==='People')result = <MenuButton key={page.name} props={{name:page, menu:people}}/>
               return(
-                <>
+                <Box key={page.name}>
                   {result}
-                </>
+                </Box>
               )
             })
             }
