@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router'
 import Navbar from '../commons/Navbar'
-import { setUser } from '../state/user'
+import { getMe } from '../state/user'
 
 const Layout = ({children}) => {
   const dispatch = useDispatch()
   const params = useLocation()
 
   useEffect(()=>{
-    dispatch(setUser())
+    dispatch(getMe())
   },[params.pathname])
   
   return (

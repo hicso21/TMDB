@@ -6,9 +6,9 @@ import ProgressBar from './ProgressBar'
 const MediaContent = ({prop}) => {
   return (
     <Box sx={{display:'flex', flexDirection:'row', width:'70%', flexWrap:'wrap'}}>
-        {!prop[0]?<ProgressBar/>:prop.map((media)=>{
+        {!prop[0]?<ProgressBar/>:prop?.map((media)=>{
             return(
-                    <MediaCard prop={media}/>
+                    <MediaCard prop={media} key={media.id}/>
             )
         })}
     </Box>

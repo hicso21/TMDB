@@ -1,4 +1,4 @@
-import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
+import { createReducer, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import fetchAPI from "../utils/fetchAPI";
 
 export const signupRequest = createAsyncThunk('SIGNUP', (input)=>{
@@ -19,15 +19,21 @@ export const logoutRequest = createAsyncThunk('LOGOUT', (input)=>{
             .catch((err)=> console.log(err))
 })
 
-export const setUser = createAsyncThunk("SETUSER", () => {
+export const getMe = createAsyncThunk("ME", () => {
     return fetchAPI({method:'GET', url:'api/user/me'})
             .then((r)=>r.data)
 });
+
+export const setUser = createAction("SETUSER", (input) => {
+    return input
+})
+
 
 const userReducer = createReducer({}, {
     [loginRequest.fulfilled]: (state, action)=> action.payload,
     [logoutRequest.fulfilled]: (state, action)=> action.payload,
     [signupRequest.fulfilled]: (state, action)=> action.payload,
+    [getMe.fulfilled]: (state, action) => action.payload,
     [setUser.fulfilled]: (state, action) => action.payload
 })
 

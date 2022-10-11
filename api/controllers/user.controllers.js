@@ -51,9 +51,7 @@ class UserController {
           name: googleUser.name,
           last_name: googleUser.last_name,
           email: googleUser.email,
-          profile_picture: googleUser.profile_picture,
-          age: googleUser.age,
-          favorites: googleUser.favorites,
+          age: googleUser.age
         });
         const payload = validateToken(token);
         payload.google = true
@@ -62,7 +60,7 @@ class UserController {
         res.status(201).send(req.user);
 
       }else{
-        const user = await UserService.find(req);
+        const user = await UserService.find(req.body);
         if (!user) return res.sendStatus(401);
         const passwordHashed = bcrypt.hashSync(req.body.password, user.salt);
         if (passwordHashed === user.password) {
@@ -71,14 +69,11 @@ class UserController {
             name: user.name,
             last_name: user.last_name,
             email: user.email,
-            profile_picture: user.profile_picture,
-            age: user.age,
-            favorites: user.favorites,
-            watched: user.watched,
-            to_watch: user.to_watch,
-            rating: user.rating
+            age: user.age
           });
           const payload = validateToken(token);
+          console.log('ESTO ES TOKEN', token)
+          console.log('ESTO ES PAYLOAD', payload)
           req.user = payload;
           res.cookie("token", token);
           res.status(201).send(req.user);
@@ -121,7 +116,7 @@ class UserController {
 
   static async getUser(req, res) {
     try {
-      const user = await UserService.getUser(req.params.id);
+      const user = await UserService.getUser(req.user._id);
       if (!user) return res.status(404).send("Usuario no encontrado");
       return res.status(200).send(user);
     } catch (error) {
@@ -139,11 +134,98 @@ class UserController {
     }
   }
 
+  static async addRating(req, res) {
+    try {
+      const user = await UserService.addRating(req.params.id, req.body)
+      return user
+      ? res.send(user)
+      : res.status(404).send("User not found");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  
+  static async getFavorites(req, res) {
+    try {
+      const user = await UserService.getUser(req.params.id);
+      return user
+      ? res.send(user.favorites)
+      : res.status(404).send("User not found");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async addWatched(req, res) {
+    try {
+      const user = await UserService.addWatched(req.params.id, req.body)
+      return user
+      ? res.send(user)
+      : res.status(404).send("User not found/watched already added");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async removeWatched(req, res) {
+    try {
+      const user = await UserService.removeWatched(req.params.id, req.body)
+      return user
+      ? res.send(user)
+      : res.status(404).send("User not found/watched already removed");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async addWatchlist(req, res) {
+    try {
+      const user = await UserService.addWatchlist(req.params.id, req.body)
+      return user
+      ? res.send(user)
+      : res.status(404).send("User not found/watchlist already added");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async removeWatchlist(req, res) {
+    try {
+      const user = await UserService.removeWatchlist(req.params.id, req.body)
+      return user
+      ? res.send(user)
+      : res.status(404).send("User not found/watchlist already removed");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  
+  static async addFavorite(req, res) {
+    try {
+      const user = await UserService.addFavorite(req.params.id, req.body)
+      return user
+      ? res.send(user)
+      : res.status(404).send("User not found/favorite already added");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  
+  static async removeFavorite(req, res) {
+    try {
+      const user = await UserService.removeFavorite(req.params.id, req.body)
+      return user
+      ? res.send(user)
+      : res.status(404).send("User not found/favorite already removed");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   // static async userUpdate(req, res) {
   //   let _id = req.params.id;
   //   let update = req.body;
   //   console.log(update);
-
+  
   //   Users.findByIdAndUpdate(_id, update, (err, bodyUpdated) => {
   //     if(err) return res.status(500).send({message: `Error al actualizar la nota: ${err}`})
   
@@ -157,47 +239,11 @@ class UserController {
   //       favorites: bodyUpdated.favorites,
   //       profile_picture: update.profile_picture,
   //     }
-
+  
   //     console.log(objectToReturn)
-
+  
   //     res.status(200).send(objectToReturn)
   //   })
   // }
-
-  static async getFavorites(req, res) {
-    try {
-      const user = await UserService.getUser(req.params.id);
-      return user
-        ? res.send(user.favorites)
-        : res.status(404).send("User not found");
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
-  static async addFavorite(req, res) {
-    try {
-      const user = await UserService.addFavorite(req.params.id, req.body);
-      return user
-        ? res.send(user)
-        : res.status(404).send("User not found/favorite already added");
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
-  static async removeFavorite(req, res) {
-    try {
-      const user = await UserService.removeFavorite(
-        req.params.id,
-        req.body._id
-      );
-      return user
-        ? res.send(user)
-        : res.status(404).send("User not found/favorite already removed");
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
 }
 module.exports = UserController;
