@@ -31,8 +31,8 @@ class UserService {
     }
   }
 
-  static async find(req) {
-    const { email } = req.body;
+  static async find(body) {
+    const { email } = body;
     try {
       return await Users.findOne({ email: email, status: true });
     } catch (error) {
@@ -48,12 +48,26 @@ class UserService {
     }
   }
 
-  static async addFavorite(id, fav) {
+  static async addRating(id, item) {
     try {
       return await Users.findByIdAndUpdate(
         id,
         {
-          $addToSet: { favorites: fav },
+          $addToSet: { rating: item },
+        },
+        { new: true, runValidators: true }
+      )
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  static async addWatchlist(id, item){
+    try {
+      return await Users.findByIdAndUpdate(
+        id,
+        {
+          $addToSet: { to_watch: item },
         },
         { new: true, runValidators: true }
       )
@@ -62,12 +76,68 @@ class UserService {
     }
   }
 
-  static async removeFavorite(id, petId) {
+  static async removeWatchlist(id, item){
     try {
       return await Users.findByIdAndUpdate(
         id,
         {
-          $pull: { favorites: petId },
+          $pull: { to_watch: item },
+        },
+        { new: true, runValidators: true }
+      )
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async addWatched(id, item){
+    try {
+      return await Users.findByIdAndUpdate(
+        id,
+        {
+          $addToSet: { watched: item },
+        },
+        { new: true, runValidators: true }
+      )
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async removeWatched(id, item){
+    try {
+      return await Users.findByIdAndUpdate(
+        id,
+        {
+          $pull: { watched: item },
+        },
+        { new: true, runValidators: true }
+      )
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async addFavorite(id, item) {
+    try {
+      return await Users.findByIdAndUpdate(
+        id,
+        {
+          $addToSet: { favorites: item },
+        },
+        { new: true, runValidators: true }
+      )
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async removeFavorite(id, item) {
+    try {
+      return await Users.findByIdAndUpdate(
+        id,
+        {
+          $pull: { favorites: item },
         },
         { new: true, runValidators: true }
       )

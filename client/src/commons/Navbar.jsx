@@ -135,10 +135,12 @@ const ResponsiveAppBar = () => {
                   {settings.map((setting) => {
                     return(
                     <Link key={setting.name} style={{textDecoration:'none', color:'inherit'}} to={setting.name !== 'Logout'?`/${setting.name.toLowerCase()}`:'/'}>
-                      <MenuItem onClick={()=>{
-                        setting?.fn()
-                        handleCloseUserMenu()
-                      }}>
+                      <MenuItem 
+                        onClick={()=>{
+                          setting?.fn()
+                          handleCloseUserMenu()
+                        }}
+                      >
                         <Typography textAlign="center">{setting.name}</Typography>
                       </MenuItem>
                     </Link>

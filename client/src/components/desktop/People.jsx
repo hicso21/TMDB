@@ -26,7 +26,7 @@ const People = () => {
         <Box sx={{m:10, ml:'12%', mr:'12%'}}>
             <Typography></Typography>            
             <Box sx={!people[0]?{}:{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gridGap:'15px'}}>
-                {!people[0]?<ProgressBar/>:people.map((item, i)=><PeopleCard prop={item}/>)}
+                {!people[0]?<ProgressBar/>:people.map((item, i)=><PeopleCard prop={item} key={item.id}/>)}
             </Box>
             <Box sx={{width:'100%', display:'flex', justifyContent:'center', mt:5}}>
             <Pagination
