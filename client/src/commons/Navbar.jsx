@@ -276,9 +276,9 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pagesDesktop.map((page) => {
               let result
-              if(page ==='Movies')result = <MenuButton key={page.name} props={{name:page, menu:movies}}/>
-              if(page ==='TV Shows')result = <MenuButton key={page.name} props={{name:page, menu:tvshows}}/>
-              if(page ==='People')result = <MenuButton key={page.name} props={{name:page, menu:people}}/>
+              if(page ==='Movies')result = <MenuButton props={{name:page, menu:movies}}/>
+              if(page ==='TV Shows')result = <MenuButton props={{name:page, menu:tvshows}}/>
+              if(page ==='People')result = <MenuButton props={{name:page, menu:people}}/>
               return(
                 <Box key={page.name}>
                   {result}

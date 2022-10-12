@@ -12,6 +12,8 @@ import SingMovie from "./components/desktop/SingMovie";
 import SingTv from "./components/desktop/SingTv";
 import Person from "./components/desktop/Person";
 import Watchlist from "./components/desktop/Watchlist";
+import Profile from "./components/desktop/Profile";
+import Watched from "./components/desktop/Watched";
 
 function App() {
   const matches = useMatches()
@@ -32,8 +34,8 @@ function App() {
               <Route path="/person/:id" element={matches?<Person/>:<></>}/>
               <Route path="/gender" element={matches?<></>:<></>}/>
               <Route path="/search" element={matches?<Search/>:<></>}/>
-              <Route path="/profile" element={matches?<></>:<></>}/>
-              <Route path="/watched" element={matches?<></>:<></>}/>
+              <Route path="/profile" element={matches?<Profile/>:<></>}/>
+              <Route path="/watched" element={matches?<Watched/>:<></>}/>
               <Route path="/watchlist" element={matches?<Watchlist/>:<></>}/>
             </Routes>
           </Layout>
