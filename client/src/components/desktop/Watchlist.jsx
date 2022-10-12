@@ -4,24 +4,28 @@ import { useSelector } from 'react-redux'
 import WatchlistCard from '../../commons/desktop/WatchlistCard'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
+import ProfileBanner from '../../commons/desktop/ProfileBanner'
 
 const Watchlist = () => {
 
-    const params = useLocation()
     const {user} = useSelector(state=>state)
     const [type, setType] = useState('')
+    const [movieCounter, setMovieCounter] = useState(0)
+    const [tvCounter, setTvCounter] = useState(0)
 
     useEffect(()=>{
         setType('movie')
-    },[params])
+        user.to_watch?.map(item=>{
+            console.log(item)
+            item.title
+            ?setMovieCounter(curr=>curr+1)
+            :setTvCounter(curr=>curr+1)
+        })
+    },[user])
 
   return (
     <>
-        <Box sx={{height:200}}>
-            <Box sx={{height:200, ml:30, mr:30, display:'flex'}}>
-                Banner
-            </Box>
-        </Box>
+        <ProfileBanner/>
         <Box sx={{ml:30, mr:30}}>
             <Box sx={{display:'flex'}}>
                 <Typography variant='span' sx={{p:2, fontSize:20}}>My Watchlist</Typography>  
@@ -44,7 +48,7 @@ const Watchlist = () => {
                                     if(item.title) filter = 'movie'
                                     else filter = 'tv'
                                     return(
-                                        <WatchlistCard filter={filter} type={type} item={item} i={i} key={item.id}/>
+                                        <WatchlistCard filter={filter} type={type} item={item} i={i} key={item.id} counter={movieCounter}/>
                                     )
                                 })
                             :
@@ -56,11 +60,11 @@ const Watchlist = () => {
                                     if(item.title) filter = 'movie'
                                     else filter = 'tv'
                                     return(
-                                        <WatchlistCard filter={filter} type={type} item={item} i={i} key={item.id}/>
+                                        <WatchlistCard filter={filter} type={type} item={item} i={i} key={item.id} counter={tvCounter}/>
                                     )
                                 })
                             :
-                                <Typography>You haven't added any TV shows to your watchlist.</Typography>
+                                <Typography>You haven't added any TV Shows to your watchlist.</Typography>
                 }
             </Box>
         </Box>

@@ -221,29 +221,17 @@ class UserController {
       console.log(error.message);
     }
   }
-  // static async userUpdate(req, res) {
-  //   let _id = req.params.id;
-  //   let update = req.body;
-  //   console.log(update);
+  static async userUpdate(req, res) {
+
+    Users.findByIdAndUpdate(req.params.id, req.body, async (err, bodyUpdated) => {
+      if(err) return res.status(500).send({message: `Error al actualizar la nota: ${err}`})
   
-  //   Users.findByIdAndUpdate(_id, update, (err, bodyUpdated) => {
-  //     if(err) return res.status(500).send({message: `Error al actualizar la nota: ${err}`})
+      if(!bodyUpdated) return res.status(500).send({message: 'No retornó objeto actualizado'})
+
+      const user = await UserService.getUser(bodyUpdated._id);
   
-  //     if(!bodyUpdated) return res.status(500).send({message: 'No retornó objeto actualizado'})
-      
-  //     const objectToReturn = {
-  //       email: update.email,
-  //       name: update.name,
-  //       _id : bodyUpdated._id,
-  //       last_name: update.last_name,
-  //       favorites: bodyUpdated.favorites,
-  //       profile_picture: update.profile_picture,
-  //     }
-  
-  //     console.log(objectToReturn)
-  
-  //     res.status(200).send(objectToReturn)
-  //   })
-  // }
+      res.status(200).send(user)
+    })
+  }
 }
 module.exports = UserController;

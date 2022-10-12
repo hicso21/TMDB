@@ -13,7 +13,7 @@ export const loginRequest = createAsyncThunk('LOGIN', (input)=>{
             .catch((err)=> console.log(err))
 })
 
-export const logoutRequest = createAsyncThunk('LOGOUT', (input)=>{
+export const logoutRequest = createAsyncThunk('LOGOUT', ()=>{
     return fetchAPI({method:'POST', url:'/api/user/logout'})
             .then((r)=> r.data)
             .catch((err)=> console.log(err))

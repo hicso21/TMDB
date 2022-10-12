@@ -15,7 +15,7 @@ router.post("/logout", UserController.logOut);
 
 router.put("/resetPassword/:id", UserController.resetPassword);
 
-//router.put("/update/:id", UserController.userUpdate);
+router.put("/update/:id", UserController.userUpdate);
 
 router.post("/rate/add/:id", UserController.addRating);
 
