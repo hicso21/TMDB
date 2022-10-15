@@ -73,7 +73,7 @@ const ResponsiveAppBar = () => {
   const tvshows = [{name:'Popular', url:'/tv?query=popular'}, {name:'Airing Today', url:'/tv?query=airingToday'}, {name:'On TV', url:'/tv?query=ontv'}, {name:'Top Rated', url:'/tv?query=topRated'}];
   const people = [{name:'Popular', url:'/people?query=popular'}];
   const pagesMobile = [{name:'Search', url:'search'}, {name:'Movies', url:'movies'}, {name:'TV Shows', url:'tv'}, {name:'People', url:'people'}];
-  const settings = [{name:'Profile', fn:()=>{}}, {name:'Watchlist', fn:()=>{}}, {name:'Watched', fn:()=>{}}, {name:'Logout', fn:()=>{dispatch(logoutRequest())}}];
+  const settings = [{name:'Profile', fn:()=>{}}, {name:'Favorites', fn:()=>{}}, {name:'Watchlist', fn:()=>{}}, {name:'Watched', fn:()=>{}}, {name:'Logout', fn:()=>{dispatch(logoutRequest())}}];
   
   const {user} = useSelector(state=>state)
   const matches = useMatches();

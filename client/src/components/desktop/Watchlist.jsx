@@ -16,7 +16,6 @@ const Watchlist = () => {
     useEffect(()=>{
         setType('movie')
         user.to_watch?.map(item=>{
-            console.log(item)
             item.title
             ?setMovieCounter(curr=>curr+1)
             :setTvCounter(curr=>curr+1)
@@ -28,13 +27,13 @@ const Watchlist = () => {
         <ProfileBanner/>
         <Box sx={{ml:30, mr:30}}>
             <Box sx={{display:'flex'}}>
-                <Typography variant='span' sx={{p:2, fontSize:20}}>My Watchlist</Typography>  
-                <Button sx={{borderRadius:20,color:'inherit', height:50,p:2}} onClick={()=>{setType('movie')}}>
+                <Typography variant='h4' sx={{p:2}}>My Watchlist</Typography>  
+                <Button sx={{borderRadius:20,color:'inherit', height:73,p:2}} onClick={()=>{setType('movie')}}>
                     <Typography sx={type=='movie'?{height:20, borderBottom:'2px solid black', fontSize:15}:{height:20, borderBottom:'2px solid transparent', fontSize:15}}>
                         Movies
                     </Typography>
                 </Button>
-                <Button sx={{borderRadius:20,color:'inherit', height:50,p:2}} onClick={()=>{setType('tv')}}>
+                <Button sx={{borderRadius:20,color:'inherit', height:73,p:2}} onClick={()=>{setType('tv')}}>
                     <Typography sx={type=='tv'?{height:20, borderBottom:'2px solid black', fontSize:15}:{height:20, borderBottom:'2px solid transparent', fontSize:15}}>
                         TV Shows
                     </Typography>
@@ -42,7 +41,7 @@ const Watchlist = () => {
             </Box>
             <Box sx={{pl:2, pr:2}}>
                 {type === 'movie'?
-                        user.to_watch?.length?
+                        movieCounter?
                                 user.to_watch?.map((item, i)=>{
                                     let filter
                                     if(item.title) filter = 'movie'
@@ -51,10 +50,9 @@ const Watchlist = () => {
                                         <WatchlistCard filter={filter} type={type} item={item} i={i} key={item.id} counter={movieCounter}/>
                                     )
                                 })
-                            :
-                                <Typography>You haven't added any Movies to your watchlist.</Typography>
+                            :<Typography>{`You haven't added any ${type==='movie'?'Movie':'TV Show'} to your Watchlist.`}</Typography>
                     :
-                        user.to_watch?.length?
+                        tvCounter?
                                 user.to_watch?.map((item, i)=>{
                                     let filter
                                     if(item.title) filter = 'movie'
@@ -64,7 +62,7 @@ const Watchlist = () => {
                                     )
                                 })
                             :
-                                <Typography>You haven't added any TV Shows to your watchlist.</Typography>
+                                <Typography>{`You haven't added any ${type==='movie'?'Movie':'TV Show'} to your Watchlist.`}</Typography>
                 }
             </Box>
         </Box>
