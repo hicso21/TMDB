@@ -17,8 +17,6 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { setUser } from '../../state/user'
 import fetchAPI from '../../utils/fetchAPI'
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 const SingTv = () => {
     const navigate = useNavigate()

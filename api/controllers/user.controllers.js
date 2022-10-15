@@ -25,12 +25,7 @@ class UserController {
           name: user.name,
           last_name: user.last_name,
           email: user.email,
-          profile_picture: user.profile_picture,
           age: user.age,
-          favorites: user.favorites,
-          watched: user.watched,
-          to_watch: user.to_watch,
-          rating: user.rating
         });
         const payload = validateToken(token);
         req.user = payload;

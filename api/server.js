@@ -9,12 +9,13 @@ require("./config/db");
 
 //----------------------- Middlewares -----------------------
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 }));
+app.use(express.json({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:3000",
+    methods: ["GET", "POST", "DELETE", "OPTIONS", "PUT"],
     credentials: true,
   })
 );

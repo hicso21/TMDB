@@ -1,10 +1,9 @@
-import Layout from "./components/Layout";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from "./components/Layout";
 import Movies from "./components/desktop/Movies";
 import TVShows from "./components/desktop/TVShows";
 import People from "./components/desktop/People";
 import Search from "./components/desktop/Search";
-import useMatches from "./hooks/useMatches";
 import Home from "./components/desktop/Home";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
@@ -14,29 +13,28 @@ import Person from "./components/desktop/Person";
 import Watchlist from "./components/desktop/Watchlist";
 import Profile from "./components/desktop/Profile";
 import Watched from "./components/desktop/Watched";
+import Favorites from "./components/desktop/Favorites";
 
 function App() {
-  const matches = useMatches()
-
   return (
     <>
       <Router>
           <Layout>
             <Routes>
-              <Route path="/" element={matches?<Home/>:<Home/>}/>
+              <Route path="/" element={<Home/>}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/signup" element={<SignUp/>}/>
-              <Route path="/movies" element={matches?<Movies/>:<></>}/>
-              <Route path="/movie/:id" element={matches?<SingMovie/>:<></>}/>
-              <Route path="/tv" element={matches?<TVShows/>:<></>}/>
-              <Route path="/tv/:id" element={matches?<SingTv/>:<></>}/>
-              <Route path="/people" element={matches?<People/>:<></>}/>
-              <Route path="/person/:id" element={matches?<Person/>:<></>}/>
-              <Route path="/gender" element={matches?<></>:<></>}/>
-              <Route path="/search" element={matches?<Search/>:<></>}/>
-              <Route path="/profile" element={matches?<Profile/>:<></>}/>
-              <Route path="/watched" element={matches?<Watched/>:<></>}/>
-              <Route path="/watchlist" element={matches?<Watchlist/>:<></>}/>
+              <Route path="/movies" element={<Movies/>}/>
+              <Route path="/movie/:id" element={<SingMovie/>}/>
+              <Route path="/tv" element={<TVShows/>}/>
+              <Route path="/tv/:id" element={<SingTv/>}/>
+              <Route path="/people" element={<People/>}/>
+              <Route path="/person/:id" element={<Person/>}/>
+              <Route path="/search" element={<Search/>}/>
+              <Route path="/favorites" element={<Favorites/>}/>
+              <Route path="/profile" element={<Profile/>}/>
+              <Route path="/watched" element={<Watched/>}/>
+              <Route path="/watchlist" element={<Watchlist/>}/>
             </Routes>
           </Layout>
       </Router>

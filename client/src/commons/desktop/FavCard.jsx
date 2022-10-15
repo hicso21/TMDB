@@ -1,23 +1,32 @@
 import { Box, Button, CardMedia, Tooltip, Typography } from '@mui/material'
 import React from 'react'
 import numberToStringDate from '../../utils/dateFunction'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { Link } from 'react-router-dom';
 import fetchAPI from '../../utils/fetchAPI';
 import { useSelector } from 'react-redux';
 import { setUser } from '../../state/user';
 
-const WatchedCard = ({filter, item, i}) => {
+const FavCard = ({filter, item}) => {
     
     const {user} = useSelector(state=>state)
     const imgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
     const handleClick= ()=>{
-        fetchAPI({method:"DELETE",data: item, url:`/api/user/watched/remove/${user._id}`})
+        fetchAPI({method:"DELETE",data: item, url:`/api/user/favorites/remove/${user._id}`})
             .then(res=>{setUser(res.data);window.location.reload()})
     }
 
   return (
     <Box sx={{display:'flex', mt:3}}>
-        <Link style={{textDecoration:'none', color:'inherit'}} to={`/${filter}/${item.id}`}>
+        <Box sx={{width:64}}>
+            <Tooltip title='Remove'>
+                <Button sx={{height:'100%', color:'inherit'}} onClick={handleClick}>
+                    <RemoveCircleOutlineIcon sx={{width:35, height:35, color:'red'}}/>
+                </Button>
+            </Tooltip>
+        </Box>
+        <Link style={{textDecoration:'none', color:'inherit', width:'100%'}} to={`/${filter}/${item.id}`}>
             <Box sx={{height:200, display:'flex', flexDirection:'row', boxShadow:'0 2px 8px rgba(0,0,0,0.1)', borderRadius:2}}>
                 <Box sx={{width:130, height:200}}>
                     <CardMedia
@@ -41,4 +50,4 @@ const WatchedCard = ({filter, item, i}) => {
   )
 }
 
-export default WatchedCard
+export default FavCard
