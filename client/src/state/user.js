@@ -8,7 +8,7 @@ export const signupRequest = createAsyncThunk('SIGNUP', (input)=>{
 })
 
 export const loginRequest = createAsyncThunk('LOGIN', (input)=>{
-    return fetchAPI({method:'POST', url:'/api/user/login', data:input, withCredentials:true})
+    return fetchAPI({method:'POST', url:'/api/user/login', data:{input}})
             .then((r)=> r.data)
             .catch((err)=> console.log(err))
 })
@@ -20,7 +20,7 @@ export const logoutRequest = createAsyncThunk('LOGOUT', ()=>{
 })
 
 export const getMe = createAsyncThunk("ME", () => {
-    return fetchAPI({method:'GET', url:'api/user/me', withCredentials:true})
+    return fetchAPI({method:'GET', url:'api/user/me'})
             .then((r)=>r.data)
 });
 
