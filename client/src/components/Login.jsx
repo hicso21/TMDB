@@ -12,11 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { loginRequest, sendSignUpRequest, signupRequest } from '../state/user';
+import { loginRequest } from '../state/user';
 import { useState } from 'react';
-import { Alert, Checkbox, Collapse, FormControlLabel, Snackbar } from '@mui/material';
+import { Alert, Snackbar } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function SignUp() {

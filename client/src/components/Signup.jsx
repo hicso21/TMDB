@@ -12,7 +12,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { sendSignUpRequest, signupRequest } from '../state/user';
 import { useState } from 'react';

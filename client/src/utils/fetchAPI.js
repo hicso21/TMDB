@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const fetchAPI = axios.create({
-    baseURL:'http://localhost:3001',
+    baseURL:'https://jnqqh7-3001.preview.csb.app',
     headers:{
         Accept:'application/json',
     },
