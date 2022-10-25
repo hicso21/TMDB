@@ -28,7 +28,7 @@ const PeopleCard = ({prop}) => {
           alt="people"
           sx={prop.profile_path?{}:{backgroundColor:'lightgray'}}
         />
-        <CardContent>
+        <CardContent sx={{height:'100%', textAlign:'center'}}>
           <Typography gutterBottom variant="h5" component="div">
             {prop.name}
           </Typography>

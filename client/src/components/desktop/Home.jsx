@@ -11,17 +11,16 @@ import '../../App.css'
 const Home = () => {
 
   const imgUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2'
-  const [moviesList, setMoviesList] = useState([])
-  const [tvshowsList, setTvshowsList] = useState([])
 
   let ImageStyle = { width: '90%', height: '40%', display:'flex', flexDirection:'row', margin:'auto'}
 
-  function Slider({ items, type }) {
+  function Slider({items, type}) {
+    console.log(items)
     return (
       <ImageList sx={ImageStyle} className='imageList'>
-        {!items[0]?<ProgressBar/>:items.map((item) => {
+        {!items[0]?<ProgressBar/>:items?.map((item) => {
         return(
-          <Link to={`/${type}/${item.id}`} style={{color: 'inherit', textDecoration:'none', padding:5, width:200}} key={item.id.toString()}>
+          <Link to={`/${type}/${item.id}`} id='linkSlider' style={{color: 'inherit', textDecoration:'none', padding:5, width:200}} key={item.id.toString()}>
             <ImageListItem>
               <img
                 src={item.poster_path?`${imgUrl}/${item.poster_path}`:''}
@@ -43,21 +42,18 @@ const Home = () => {
   }
 
   const dispatch = useDispatch()
-  const {movies} = useSelector(state=>state)
-  const {tvshows} = useSelector(state=>state)
+  const {movies, tvshows} = useSelector(state=>state)
 
   useEffect(()=>{
     dispatch(getPopularMovies())
-    .then(resp=>{setMoviesList(resp.payload)})
     dispatch(getPopularShows())
-    .then(resp=>{setTvshowsList(resp.payload)})
   },[])
 
   return (
     <>
       <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', ml:'10%', mr:'10%'}}>
         <Typography variant='h4' sx={{width:'100%', ml:'12%', pt:2}}>Popular Movies</Typography>
-        <Slider items={moviesList} type={'movie'}/>
+        <Slider items={movies} type={'movie'}/>
       </Box>
       <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', ml:'10%', mr:'10%'}}>
         <Typography variant='h4' sx={{width:'100%', ml:'12%'}}>Popular TV Shows</Typography>

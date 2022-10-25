@@ -2,49 +2,46 @@ import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 import fetchAPI from "../utils/fetchAPI";
 
 export const getPopularShows = createAsyncThunk('POPULARSHOWS', ()=>{
-    return fetchAPI(
-                    '/api/tvshows/getPopular',
-                    { withCredentials: true, credentials: 'include' }
-                )
+    return fetchAPI({method:'GET',url:'/api/tvshows/getPopular'})
                 .then(res=>res.data.results)
 })
 
 export const getAiringTodayShows = createAsyncThunk('AIRINGSHOWS', ()=>{
     return fetchAPI(
-                    '/api/tvshows/getAiringToday',
-                    { withCredentials: true, credentials: 'include' }
+                    {method:'GET',url:'/api/tvshows/getAiringToday'},
+                    { withCredentials: true, credentials: 'include'}
                 )
                 .then(res=>res.data.results)
 })
 
 export const getTopRatedShows = createAsyncThunk('TOPRATEDSHOWS', ()=>{
     return fetchAPI(
-                    '/api/tvshows/getTopRated',
-                    { withCredentials: true, credentials: 'include' }
+                    {method:'GET',url:'/api/tvshows/getTopRated'},
+                    { withCredentials: true, credentials: 'include'}
                 )
                 .then(res=>res.data.results)
 })
 
 export const getOnTVShows = createAsyncThunk('ONTVSHOWS', ()=>{
     return fetchAPI(
-                    '/api/tvshows/getOnTV',
-                    { withCredentials: true, credentials: 'include' }
+                    {method:'GET',url:'/api/tvshows/getOnTV'},
+                    { withCredentials: true, credentials: 'include'}
                 )
                 .then(res=>res.data.results)
 })
 
 export const getOneTvshow = createAsyncThunk('ONETVSHOW', (input)=>{
     return fetchAPI(
-                    `/api/tvshows/getOneTvshow/${input}`,
-                    { withCredentials: true, credentials: 'include' }
+                    {method:'GET',url:`/api/tvshows/getOneTvshow/${input}`},
+                    { withCredentials: true, credentials: 'include'}
                 )
                 .then(res=>res.data)
 })
 
 export const searchByShow = createAsyncThunk('SEARCHBYSHOW', (input)=>{
     return fetchAPI(
-                    `/api/search/tvshow/${input}`,
-                    { withCredentials: true, credentials: 'include' }
+                    {method:'GET',url:`/api/search/tvshow/${input}`},
+                    { withCredentials: true, credentials: 'include'}
                 )
                 .then(res=>res.data.results)
 })

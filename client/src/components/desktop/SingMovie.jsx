@@ -230,7 +230,7 @@ const SingMovie = () => {
           <ImageList sx={ImageStyle} className='imageList'>
             {!items?<ProgressBar/>:items?.map((item) => {
             return(
-              <Link to={`/${type}/${item.id}`} style={{color: 'inherit', textDecoration:'none', padding:5, width:200}} key={item.id}>
+              <Link to={`/${type}/${item.id}`} id='linkSlider' style={{color: 'inherit', textDecoration:'none', padding:5, width:200}} key={item.id}>
                 <ImageListItem>
                   <img
                     src={item.profile_path?`${imgUrl}/${item.profile_path}`:notPhoto}

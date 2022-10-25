@@ -3,7 +3,7 @@ import fetchAPI from "../utils/fetchAPI";
 
 export const getPopularPeople = createAsyncThunk('POPULARPEOPLE', (input)=>{
     return fetchAPI(
-                    `/api/people/getPopular/${input}`,
+                    {method:'GET',url:`/api/people/getPopular/${input}`},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)
@@ -11,7 +11,7 @@ export const getPopularPeople = createAsyncThunk('POPULARPEOPLE', (input)=>{
 
 export const searchByPerson = createAsyncThunk('SEARCHBYPERSON', (input)=>{
     return fetchAPI(
-                    `/api/people/search/${input}`,
+                    {method:'GET',url:`/api/people/search/${input}`},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data)

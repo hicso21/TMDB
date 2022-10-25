@@ -46,7 +46,7 @@ export default function FormDialog() {
   return (
     <>
       <Button variant="contained" onClick={handleClickOpen} sx={{ml:2}}>
-        Change Password
+        Change Email
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Change Password</DialogTitle>

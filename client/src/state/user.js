@@ -3,13 +3,19 @@ import fetchAPI from "../utils/fetchAPI";
 
 export const signupRequest = createAsyncThunk('SIGNUP', (input)=>{
     return fetchAPI({method:'POST', url:'/api/user/signup', data:input})
-            .then((r)=> r.data)
+            .then((r)=> {
+                console.log(r)
+                return r.data
+            })
             .catch((err)=> console.log(err))
 })
 
 export const loginRequest = createAsyncThunk('LOGIN', (input)=>{
-    return fetchAPI({method:'POST', url:'/api/user/login', data:{input}})
-            .then((r)=> r.data)
+    return fetchAPI({method:'POST', url:'/api/user/login', data:input})
+            .then((r)=> {
+                console.log(r)
+                return r.data
+            })
             .catch((err)=> console.log(err))
 })
 
