@@ -3,15 +3,14 @@ import fetchAPI from "../utils/fetchAPI";
 
 export const getPopularMovies = createAsyncThunk('POPULARMOVIES', ()=>{
     return fetchAPI(
-                    '/api/movies/getPopular',
-                    { withCredentials: true, credentials: 'include' }
+                    {method:'GET', url:'/api/movies/getPopular'}
                 )
                 .then(res=>res.data.results)
 })
 
 export const getNowPlayingMovies = createAsyncThunk('NOWPLAYINGMOVIES', ()=>{
     return fetchAPI(
-                    '/api/movies/getNowPlaying',
+                    {method:'GET', url:'/api/movies/getNowPlaying'},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)
@@ -19,7 +18,7 @@ export const getNowPlayingMovies = createAsyncThunk('NOWPLAYINGMOVIES', ()=>{
 
 export const getTopRatedMovies = createAsyncThunk('TOPRATEDMOVIES', ()=>{
     return fetchAPI(
-                    '/api/movies/getTopRated',
+                    {method:'GET', url:'/api/movies/getTopRated'},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)
@@ -27,7 +26,7 @@ export const getTopRatedMovies = createAsyncThunk('TOPRATEDMOVIES', ()=>{
 
 export const getUpcomingMovies = createAsyncThunk('TOPRATEDMOVIES', ()=>{
     return fetchAPI(
-                    '/api/movies/getUpcoming',
+                    {method:'GET', url:'/api/movies/getUpcoming'},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)
@@ -35,7 +34,7 @@ export const getUpcomingMovies = createAsyncThunk('TOPRATEDMOVIES', ()=>{
 
 export const getOneMovie = createAsyncThunk('ONEMOVIE', (input)=>{
     return fetchAPI(
-                    `/api/movies/getOneMovie/${input}`,
+                    {method:'GET', url:`/api/movies/getOneMovie/${input}`},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data)
@@ -43,7 +42,7 @@ export const getOneMovie = createAsyncThunk('ONEMOVIE', (input)=>{
 
 export const searchByMovie = createAsyncThunk('SEARCHBYMOVIE', (input)=>{
     return fetchAPI(
-                    `/api/search/movie/${input}`,
+                    {method:'GET', url:`/api/search/movie/${input}`},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)
@@ -51,7 +50,7 @@ export const searchByMovie = createAsyncThunk('SEARCHBYMOVIE', (input)=>{
 
 export const getMovieGenders = createAsyncThunk('SEARCHBYMOVIE', (input)=>{
     return fetchAPI(
-                    `/api/search/movie/${input}`,
+                    {method:'GET', url:`/api/search/movie/${input}`},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)

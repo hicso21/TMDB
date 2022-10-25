@@ -216,6 +216,7 @@ class UserController {
       console.log(error.message);
     }
   }
+  
   static async userUpdate(req, res) {
 
     Users.findByIdAndUpdate(req.params.id, req.body, async (err, bodyUpdated) => {

@@ -7,7 +7,7 @@ import showsReducer from "./tvshows";
 import userReducer from "./user";
 
 const store = configureStore({
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(logger),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
     reducer: {
       movies: moviesReducer,
       user: userReducer,

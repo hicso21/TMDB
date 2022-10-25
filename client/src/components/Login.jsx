@@ -17,6 +17,7 @@ import { loginRequest } from '../state/user';
 import { useState } from 'react';
 import { Alert, Snackbar } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import GoogleLogin from './desktop/GoogleLogin';
 
 export default function SignUp() {
 
@@ -151,6 +152,9 @@ export default function SignUp() {
                   <VisibilityIcon/>
                 </Button>
               </Grid>
+            </Grid>
+            <Grid container justifyContent="center" width={'100%'} padding={2}>
+              <GoogleLogin/>
             </Grid>
             <Button
               type="submit"

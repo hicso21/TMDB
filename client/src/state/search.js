@@ -3,7 +3,7 @@ import fetchAPI from "../utils/fetchAPI";
 
 export const getSearch = createAsyncThunk('SEARCH', (input)=>{
     return fetchAPI(
-                    `/api/search/${input}`,
+                    {method:'GET',url:`/api/search/${input}`},
                     { withCredentials: true, credentials: 'include' }
                 )
                 .then(res=>res.data.results)
