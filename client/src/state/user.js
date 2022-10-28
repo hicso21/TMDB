@@ -20,6 +20,7 @@ export const loginRequest = createAsyncThunk('LOGIN', (input)=>{
 })
 
 export const logoutRequest = createAsyncThunk('LOGOUT', ()=>{
+    localStorage.removeItem('google')
     return fetchAPI({method:'POST', url:'/api/user/logout'})
             .then((r)=> r.data)
             .catch((err)=> console.log(err))

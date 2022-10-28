@@ -15,8 +15,10 @@ const ProfileBanner = () => {
             <ImageListItem sx={{margin:'auto 0'}}>
               <img src={user?.profile_picture} alt="" style={{borderRadius:1000, height:150, width:150}}/>
             </ImageListItem>
-            <Box sx={{width:'100%', p:5, display:'flex', alignItems:'center'}}>
-              <Typography color={'#5ce1e6'}><strong>Created: {user?.since?.substring(0,15)}</strong></Typography>
+            <Box sx={{width:'100%', p:5, display:'flex', flexDirection:'column', justifyContent:'space-around'}}>
+              <Typography color={'#5ce1e6'}><strong>{user?.name} {user?.last_name}</strong></Typography>
+              {user?.age?<Typography color={'#5ce1e6'}><strong>{user?.age} years</strong></Typography>:<></>}
+              <Typography color={'#5ce1e6'}><strong>Created: {user?.since?.substring(4,15)}</strong></Typography>
             </Box>
           </Box>
       </Box>
