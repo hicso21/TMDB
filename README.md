@@ -1,1 +1,1 @@
-This is a copy of TMDB for practice the skills
+This is a copy of TMDB for skills practice
